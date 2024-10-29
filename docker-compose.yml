@@ -9,13 +9,6 @@ services:
       - "6000:6000"
     depends_on:
       - mysql
-    environment:
-      MYSQL_HOST: mysql
-      MYSQL_USER: root
-      MYSQL_PASSWORD: example
-      MYSQL_DATABASE: your_database
-    networks:
-      - app-network
   mysql:
     image: mysql:5.7
     container_name: mysql
