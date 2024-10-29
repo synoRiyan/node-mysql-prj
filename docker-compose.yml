@@ -6,7 +6,7 @@ services:
     container_name: node-app
     pull_policy: always
     ports:
-      - "3000:3000"
+      - "6000:6000"
     depends_on:
       - mysql
   mysql:
