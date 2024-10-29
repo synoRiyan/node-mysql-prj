@@ -1,17 +1,15 @@
 # Use the official Node.js image
-FROM node:18.14.1 as build
+FROM node:14
 
 # Set the working directory
 WORKDIR /app
-#COPY ./package.json /usr/interviewBE/
 
 # Copy the entire app directory first
-
+COPY app/ .
 
 # Install dependencies
-RUN npm install && npm i -g pm2
+RUN npm install
 
-COPY . .
 # Expose the port
 EXPOSE 3000
 
