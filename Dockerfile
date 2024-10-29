@@ -6,6 +6,7 @@ WORKDIR /app
 #COPY ./package.json /usr/interviewBE/
 
 # Copy the entire app directory first
+COPY package*.json ./
 
 
 # Install dependencies
