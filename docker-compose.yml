@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app:
-    image: node-app:3000/node-app:1.6
+    image: 192.168.3.7:3000/node-app:1.6
     container_name: node-app
     pull_policy: always
     ports:
