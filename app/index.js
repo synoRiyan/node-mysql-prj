@@ -3,7 +3,7 @@ const mysql = require('mysql');
 const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 6000;
 
 // Serve static files from the 'public' directory
 app.use(express.static('public'));

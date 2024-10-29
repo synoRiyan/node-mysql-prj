@@ -14,7 +14,7 @@ RUN npm install && npm i -g pm2
 
 COPY . .
 # Expose the port
-EXPOSE 3000
+EXPOSE 6000
 
 # Start the application
 CMD ["npm", "start"]
