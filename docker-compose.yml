@@ -1,8 +1,8 @@
-version: '1.7'
+version: '1.6'
 
 services:
   app:
-    image: "${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMAGE_VERSION}"
+    image: 192.168.3.7:3000/node-app:1.6
     container_name: node-app
     pull_policy: always
     ports:
