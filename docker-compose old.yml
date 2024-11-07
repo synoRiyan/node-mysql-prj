@@ -6,7 +6,7 @@ services:
     container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: mydb
+      MYSQL_DATABASE: myapp
     volumes:
       - ./mysql:/var/lib/mysql
     ports:

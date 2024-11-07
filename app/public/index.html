@@ -1,11 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Node + MySQL App</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My App - Record Management</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .form-container, .list-container { margin-bottom: 20px; }
+    .record-item { margin-bottom: 10px; }
+  </style>
 </head>
 <body>
-    <h1>Hello from Node + MySQL App!</h1>
+  <h1>Record Management</h1>
+
+  <!-- Add Record Form -->
+  <div class="form-container">
+    <h2>Add New Record</h2>
+    <form id="addRecordForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      <button type="submit">Add Record</button>
+    </form>
+  </div>
+
+  <!-- Delete Record Form -->
+  <div class="form-container">
+    <h2>Delete Record by ID</h2>
+    <form id="deleteRecordForm">
+      <label for="recordId">Record ID:</label>
+      <input type="number" id="recordId" name="recordId" required>
+      <button type="submit">Delete Record</button>
+    </form>
+  </div>
+
+  <!-- List Records Section -->
+  <div class="list-container">
+    <h2>Record List</h2>
+    <button onclick="fetchRecords()">Refresh List</button>
+    <div id="recordList"></div>
+  </div>
+
+  <script>
+    // Handle Add Record
+    document.getElementById('addRecordForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+
+      const response = await fetch('/api/records', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email })
+      });
+
+      if (response.ok) {
+        alert('Record added successfully!');
+        document.getElementById('addRecordForm').reset();
+        fetchRecords();
+      } else {
+        alert('Failed to add record.');
+      }
+    });
+
+    // Handle Delete Record
+    document.getElementById('deleteRecordForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const recordId = document.getElementById('recordId').value;
+
+      const response = await fetch(`/api/records/${recordId}`, { method: 'DELETE' });
+
+      if (response.ok) {
+        alert('Record deleted successfully!');
+        fetchRecords();
+      } else {
+        alert('Failed to delete record.');
+      }
+    });
+
+    // Fetch and Display Records
+    async function fetchRecords() {
+      const response = await fetch('/api/records');
+      const records = await response.json();
+      const recordList = document.getElementById('recordList');
+
+      recordList.innerHTML = records.map(record => `
+        <div class="record-item">
+          <strong>ID:</strong> ${record.id} <br>
+          <strong>Name:</strong> ${record.name} <br>
+          <strong>Email:</strong> ${record.email} <br>
+        </div>
+      `).join('');
+    }
+
+    // Load records on page load
+    fetchRecords();
+  </script>
 </body>
 </html>
